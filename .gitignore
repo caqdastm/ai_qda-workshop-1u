@@ -1,0 +1,29 @@
+# Python i notebooki
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+
+# Sekrety i środowiska
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+
+# Wyniki lokalne
+outputs/
+06_outputs/**
+!06_outputs/.gitkeep
+test_github_colab.csv
+mini_corpus_prepared.csv
+mini_corpus_statistics.csv
+
+# Pliki tymczasowe i systemowe
+tmp/
+temp/
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db
+desktop.ini
