@@ -1,5 +1,23 @@
 # Cztery notebooki uczestnika
 
+## Punkt Odniesienia
+
+Zanim zaczniesz budować własny podstawowy pipeline, poświęć około 10 minut na
+obejrzenie wyniku referencyjnego opracowanego na całym korpusie:
+
+1. Przeczytaj jedną pełną gałąź `T -> S -> F -> D` w
+   [finalnej książce kodowej](../01_data/codebook/codebook_prekariat_final.md).
+2. Porównaj 2-3 [karty kodów S](../01_data/codebook/synthetic_codes.csv),
+   zwracając uwagę na definicję oraz kryteria włączenia i wyłączenia.
+3. Otwórz [graf relacji](../01_data/codebook/relational-codebook-graph.html) w
+   widoku `F-F + T-T` i odczytaj jedną ścieżkę przyczynową lub strategiczną z
+   pomocą [legendy](../01_data/codebook/relation_legend.md).
+
+Nie analizuj teraz całej książki. Ten krótki ogląd pokazuje, do jakiego rodzaju
+artefaktu prowadzą kolejne ćwiczenia; nie jest kluczem odpowiedzi dla próbki.
+
+## Kolejność Pracy
+
 Każdy notebook jest małym etapem pipeline'u kodowania AI_QDA. Otwieraj je po
 kolei; artefakty są przekazywane przez `MyDrive/AI_QDA_Workshop`.
 

@@ -7,8 +7,10 @@ danych z AI.
 
 1. Otwórz [`00_github_colab/`](00_github_colab/) i wykonaj moduł wprowadzający.
 2. Dane warsztatowe znajdują się w [`01_data/`](01_data/).
-3. Pozostałe części będą uzupełniane po zsynchronizowaniu materiałów autorów.
-4. Cztery notebooki Vibe Coding są już dostępne bezpośrednio w
+3. Przed Vibe Coding obejrzyj
+   [finalną książkę kodową i graf relacji](01_data/codebook/).
+4. Pozostałe części będą uzupełniane po zsynchronizowaniu materiałów autorów.
+5. Cztery notebooki Vibe Coding są już dostępne bezpośrednio w
    [`04_vibe_coding/`](04_vibe_coding/).
 
 [![Notebook 00: start](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/caqdastm/ai_qda-workshop-1u/blob/main/00_github_colab/00_start_here_github_colab.ipynb)
