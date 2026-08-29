@@ -24,7 +24,7 @@ danych z AI.
 02_ai_prompting/          materiały w przygotowaniu
 03_ai_assisted_coding/    materiały w przygotowaniu
 04_vibe_coding/           cztery notebooki uczestnika
-05_ai_programming/        materiały w przygotowaniu
+05_ai_programming/        lokalna walidacja, mała zmiana z Codexem i Git
 06_outputs/               katalog wyników pracy uczestników
 ```
 

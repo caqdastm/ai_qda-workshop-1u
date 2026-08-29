@@ -8,11 +8,13 @@ nie zawiera kodu, promptów ani konfiguracji procedury autorskiej.
 
 1. Otwórz [`codebook_prekariat_final.md`](codebook_prekariat_final.md) i
    przeczytaj wprowadzenie oraz jedną pełną gałąź `T -> S -> F -> D`.
-2. W [`synthetic_codes.csv`](synthetic_codes.csv) obejrzyj 63 operacyjne karty
+2. Użyj [`codebook_prekariat_final.csv`](codebook_prekariat_final.csv), gdy
+   chcesz sprawdzić hierarchię programowo w module 05.
+3. W [`synthetic_codes.csv`](synthetic_codes.csv) obejrzyj 63 operacyjne karty
    S: definicje, kryteria włączenia i wyłączenia oraz granice kodów.
-3. Otwórz [`relational-codebook-graph.html`](relational-codebook-graph.html),
+4. Otwórz [`relational-codebook-graph.html`](relational-codebook-graph.html),
    zaczynając od widoku `F-F + T-T`.
-4. Przy interpretacji krawędzi korzystaj z
+5. Przy interpretacji krawędzi korzystaj z
    [`relation_legend.md`](relation_legend.md).
 
 ## Jak Czytać Hierarchię

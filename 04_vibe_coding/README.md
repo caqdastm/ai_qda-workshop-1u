@@ -30,6 +30,19 @@ kolei; artefakty są przekazywane przez `MyDrive/AI_QDA_Workshop`.
 4. [Od F do książki T–S–F–D](04_od_wzorcow_do_ksiazki_TSFD.ipynb) — jedna
    operacyjna karta S, oszczędny T, walidacja i handoff do Codexa.
 
+Ostatni notebook tworzy na Dysku Google plik
+`AI_QDA_Workshop_handoff.zip`. Pobierzesz go przed przejściem do pracy
+lokalnej w module [`05_ai_programming`](../05_ai_programming/).
+
+## Materiały Wspólne
+
+- [Soczewka kodowania PREWORK](coding_lens_prekariat.md) porządkuje decyzję o
+  relewancji oraz role D, F, S i T.
+- [Kontrakt wejść i wyjść](io_contract.md) pokazuje, który artefakt jest
+  wejściem następnego notebooka.
+- [Schemat książki kodowej](codebook_schema.md) definiuje kolumny wspólne dla
+  kandydackiego wyniku `sample` i referencyjnego wyniku `full`.
+
 ## Wspólna pętla
 
 ```text
