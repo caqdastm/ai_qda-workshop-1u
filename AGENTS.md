@@ -10,4 +10,5 @@
 - Nie nadawaj statusu `accepted`.
 - Nie używaj sieci ani kluczy API podczas lokalnych testów Codex.
 - Zmieniaj jedną małą funkcjonalność i uruchamiaj najmniejszy właściwy test.
-- Nie dodawaj `outputs/`, sekretów ani niezanonimizowanych danych do Git.
+- W `outputs/` zachowuj tylko sprawdzone produkty opublikowane przez notebook;
+  nie dodawaj sekretów, pełnych logów API ani niezanonimizowanych danych.

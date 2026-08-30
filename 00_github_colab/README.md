@@ -12,32 +12,33 @@ potrzeba w pracy z materiałem
   -> mały fragment kodu
   -> obserwacja wyniku i kontrola techniczna
   -> decyzja badacza
-  -> zapis notebooka i commit
+  -> zapis produktów i notebooka w prywatnym repo
 ```
 
 [![Notebook 00: start](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/caqdastm/ai_qda-workshop-1u/blob/main/00_github_colab/00_start_here_github_colab.ipynb)
 [![Notebook 01: Gemini](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/caqdastm/ai_qda-workshop-1u/blob/main/00_github_colab/01_colab_gemini_vibe_coding.ipynb)
 
-### Fork a odznaki Colaba
+### Prywatny workspace a odznaki Colaba
 
-Linki względne między plikami na GitHubie działają w obrębie aktualnie
-oglądanego forka. Odznaki powyżej mają adresy absolutne, dlatego zawsze
-otwierają czysty wzorzec z repozytorium prowadzących.
+Odznaki mają adresy absolutne i zawsze otwierają publiczny wzorzec. Do trwałej
+pracy utwórz prywatne repo przez **Use this template**, a następnie dodaj w
+Colab Secrets `AI_QDA_REPOSITORY` i `GITHUB_TOKEN`.
 
-- Pierwsze otwarcie: użyj odznaki, a potem wybierz w Colabie
-  **Plik -> Zapisz kopię w GitHubie** i wskaż swój fork.
+- Pierwsze otwarcie może odbyć się przez odznakę w trybie demonstracyjnym.
 - Powrót do zapisanej pracy: wybierz w Colabie
-  **Plik -> Otwórz notatnik -> GitHub** i notebook ze swojego forka.
+  **Plik -> Otwórz notatnik -> GitHub** i notebook z prywatnego repo.
+- Komórka infrastruktury klonuje prywatne repo, a osobna komórka publikuje
+  wyłącznie sprawdzone pliki z `outputs/`.
 
 Dokładna ścieżka jest w
-[instrukcji konta, forka i Colaba](instrukcja_konto_fork_colab.md).
+[instrukcji prywatnego repo i Colaba](instrukcja_konto_fork_colab.md).
 
 ## Ile czasu
 
 **Zalecenie: 2 godziny 30 minut na żywo oraz 20-30 minut przygotowania kont
 przed zajęciami.**
 
-- 2 godziny wystarczą, gdy wszyscy mają już działające konta i forki;
+- 2 godziny wystarczą, gdy wszyscy mają już prywatne repo, token i sekrety;
 - 2 godziny 30 minut dają czas na ćwiczenie, pytania i typowe problemy z
   logowaniem lub zapisem;
 - 3 godziny są bezpieczniejsze, jeżeli konta mają być zakładane dopiero na
@@ -49,7 +50,7 @@ Szczegółowy podział znajduje się w [planie modułu](plan_modulu.md).
 
 Po zakończeniu uczestnik:
 
-- rozróżnia repozytorium prowadzących, własny fork i commit;
+- rozróżnia publiczny wzorzec, prywatne repo, runtime i commit;
 - wie, co w Colabie jest tymczasowym wykonaniem, a co zapisanym notebookiem lub
   artefaktem;
 - rozpoznaje potrzebną procedurę na podstawie celu pracy z materiałem;
@@ -58,12 +59,13 @@ Po zakończeniu uczestnik:
   zadanie dla Gemini;
 - ocenia tabelę wynikową i czytelną listę kontroli zamiast ufać samemu
   komunikatowi sukcesu;
-- zapisuje notebook w swoim forku, a wygenerowane dane pozostawia poza Git.
+- zapisuje sprawdzone produkty i notebook w prywatnym repo;
+- potrafi rozpocząć kolejny notebook od wyników zachowanych w poprzednim.
 
 ## Materiały i kolejność
 
 1. Przed zajęciami wykonaj [checklistę kont i dostępu](checklista_przed_zajeciami.md).
-2. Przejdź przez [instrukcję konta, forka i Colaba](instrukcja_konto_fork_colab.md).
+2. Przejdź przez [instrukcję prywatnego repo i Colaba](instrukcja_konto_fork_colab.md).
 3. Uruchom [notebook 00: od potrzeby do procedury](00_start_here_github_colab.ipynb).
 4. Uruchom [notebook 01: od procedury do funkcji z Gemini](01_colab_gemini_vibe_coding.ipynb).
 5. Korzystaj z [kart ćwiczeń i promptów](cwiczenia_git_colab_gemini.md).

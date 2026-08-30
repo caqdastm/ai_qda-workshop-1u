@@ -8,7 +8,9 @@ badawczymi.
 - zaloguj się lub utwórz konto;
 - potwierdź adres e-mail;
 - otwórz repozytorium `caqdastm/ai_qda-workshop-1u`;
-- wybierz **Fork** i sprawdź, czy właścicielem kopii jest Twoje konto.
+- wybierz **Use this template** i utwórz nowe repo z widocznością **Private**;
+- utwórz ograniczony fine-grained token z dostępem wyłącznie do tego repo i
+  uprawnieniem **Contents: Read and write**.
 
 ## Konto Google I Colab
 
@@ -16,6 +18,8 @@ badawczymi.
 - otwórz [Google Colab](https://colab.research.google.com/);
 - sprawdź, czy możesz utworzyć pusty notebook i uruchomić `print("OK")`;
 - sprawdź, czy w interfejsie notebooka widzisz ikonę Gemini lub panel AI.
+- dodaj w Colab Secrets `AI_QDA_REPOSITORY` w formacie `login/nazwa-repo` oraz
+  `GITHUB_TOKEN`; włącz ich dostęp dla notebooka startowego.
 
 Dostęp do funkcji AI zależy między innymi od wieku konta i dostępności usługi.
 Brak panelu Gemini nie blokuje warsztatu: notebook 01 ma rozwiązanie bazowe,
@@ -36,8 +40,11 @@ a kod można też uzyskać w zwykłym czacie Gemini.
 ## Bezpieczeństwo
 
 - nie wklejaj do Gemini kluczy API ani danych logowania;
+- nie wpisuj `GITHUB_TOKEN` do komórki, promptu, adresu repo ani commita;
 - podczas modułu zerowego używaj wyłącznie mini-transkrypcji ćwiczeniowej z notebooka;
-- upewnij się, że pracujesz we własnym forku, nie w repozytorium prowadzących.
+- upewnij się, że komórka infrastruktury pokazuje tryb
+  `participant_repository`, nie `public_demo`;
+- po warsztacie możesz unieważnić token bez usuwania prywatnego repo i jego historii.
 
 Zgłoś prowadzącemu przed zajęciami, jeśli nie możesz wykonać któregoś z tych
 kroków.

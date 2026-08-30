@@ -1,13 +1,18 @@
 # Przejście Z Vibe Codingu Do Codexa: 4h
 
 Uczestnik ma cztery karty procedur, kandydackie artefakty zapisane przez
-notebooki oraz dostęp do [`../01_data/codebook/`](../01_data/codebook/). Celem jest
+notebooki oraz dostęp do `04_vibe_coding/reference_results/`. Celem jest
 zobaczenie projektu jako łańcucha decyzji i zależnych funkcjonalności, nie
 odtwarzanie autorskiego pipeline'u full.
 
+Zacznij od sprawdzenia, czy ostatnia komórka notebooka 04 zwróciła `pushed`
+albo `up_to_date`. Następnie sklonuj lokalnie **własne prywatne repo
+uczestnika**, nie publiczny wzorzec. Dzięki temu Codex zobaczy sprawdzone
+artefakty w `04_vibe_coding/outputs/` oraz ich historię commitów.
+
 Punktem wyjścia jest model kodowania opisany wcześniej przez badacza, a nie
-kod. Wypełnij najpierw [`codex_adaptation_brief.md`](codex_adaptation_brief.md):
-wskaż pytanie,
+kod. Wypełnij najpierw
+`resources/templates/codex_adaptation_brief_template.md`: wskaż pytanie,
 jednostki kodowania, znaczenie etapów D/F/S/T, decyzje zastrzeżone dla badacza
 i tylko jedną planowaną adaptację.
 
@@ -28,11 +33,8 @@ innego korpusu lub pytania badawczego.
 Codex może czytać:
 
 - cztery notebooki uczestnika, karty procedur i własne artefakty;
-- [`../04_vibe_coding/codebook_schema.md`](../04_vibe_coding/codebook_schema.md),
-  [`../04_vibe_coding/io_contract.md`](../04_vibe_coding/io_contract.md) i
-  własne notatki;
-- referencyjny codebook CSV, wersję Markdown i graf relacji do porównań oraz
-  walidacji.
+- `codebook_schema.md`, `io_contract.md` i notatki audytowe;
+- referencyjny codebook CSV oraz przypisania full do porównań i walidacji.
 
 Nie prosimy go o analizę autorskich notebooków, kompletnych runnerów,
 dostrojonych promptów, logów API, embeddingów, cache ani kolejek audytu.
@@ -45,7 +47,7 @@ Najpierw nie zmieniaj plików. Przejrzyj cztery notebooki uczestnika, moje
 karty procedur, handoff i kandydackie artefakty. Odtwórz dla każdego etapu:
 cel kodowania, wejście, procedurę, kontrolę techniczną, artefakt i decyzję
 badacza. Sprawdź ślad do text_unit_id i source_file oraz zależności D -> F ->
-S -> T. Wynik full traktuj wyłącznie jako referencyjne porównanie skali, nie
+S -> T. Wynik full traktuj wyłącznie jako zaakceptowane porównanie skali, nie
 jako kod ani książkę do automatycznego przeniesienia.
 ```
 
@@ -53,7 +55,7 @@ jako kod ani książkę do automatycznego przeniesienia.
 
 **Czas:** 45-50 min
 
-1. Skopiuj lub wskaż Codexowi cztery karty procedur i końcowy handoff.
+1. Wskaż Codexowi `04_vibe_coding/outputs/`; nie kopiuj plików ręcznie między repo.
 2. Poproś o zestawienie `cel → wejście → procedura → artefakt → kontrola → decyzja`.
 3. Porównaj mapę Codexa z własnym protokołem kodowania.
 4. Zapisz krótki przepływ:
@@ -73,7 +75,7 @@ Uruchom przygotowany walidator i jego testy, zanim cokolwiek zmienisz:
 
 ```bash
 python 05_ai_programming/starter/validate_codebook.py \
-  01_data/codebook/codebook_prekariat_final.csv
+  04_vibe_coding/reference_results/codebook_prekariat_full.csv
 python -m unittest discover -s 05_ai_programming/starter/tests
 ```
 
@@ -97,9 +99,8 @@ Dopiero potem przeczytaj techniczny punkt rozszerzenia
 przypadek zwykły i brzegowy oraz zakaz automatycznego przypisywania rodzica.
 Poproś Codexa o implementację tej jednej funkcji i odblokowanie testu.
 Uruchom testy ponownie. Dopiero potem uruchom walidator osobno na sample i
-`01_data/codebook/codebook_prekariat_final.csv`. Błąd sample nie dowodzi błędu
-full i odwrotnie. Wynik sample po rozpakowaniu handoffu znajduje się w
-`06_outputs/uczestnicy/AI_QDA_Workshop/04_candidate_codebook.csv`.
+`reference_results/codebook_prekariat_full.csv`. Błąd sample nie dowodzi błędu
+full i odwrotnie.
 
 **Wynik:** skrypt oraz czytelny raport PASS/FAIL.
 
@@ -149,8 +150,9 @@ git status
 git diff --check
 ```
 
-Do commita dodaj kod, test, konfigurację i decyzje. Nie dodawaj wygenerowanych
-`outputs/`, kluczy API ani pełnego pipeline'u autorskiego.
+Do commita dodaj kod, test, konfigurację i decyzje. W `outputs/` zachowuj tylko
+sprawdzone produkty wybrane przez notebooki; nie dodawaj pełnych logów API,
+kluczy ani pipeline'u autorskiego.
 
 ## Pytania Końcowe
 

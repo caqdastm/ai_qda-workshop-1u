@@ -8,10 +8,13 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
+import base64
 import hashlib
 import json
 import os
 from pathlib import Path
+import re
+import subprocess
 from typing import Any
 
 import pandas as pd
@@ -131,6 +134,214 @@ def load_dataframe(path: str | Path, required: list[str] | None = None) -> pd.Da
     if missing:
         raise ValueError(f"Brak wymaganych kolumn w {source.name}: {missing}")
     return frame
+
+
+def read_secret(name: str) -> str:
+    """Read a secret from Colab or the local environment without printing it."""
+    value = os.environ.get(name, "").strip()
+    if value:
+        return value
+    try:
+        from google.colab import userdata
+
+        return str(userdata.get(name) or "").strip()
+    except Exception:
+        return ""
+
+
+PUBLIC_WORKSHOP_REPOSITORY = "caqdastm/ai_qda-workshop-1u"
+GITHUB_REPOSITORY_PATTERN = re.compile(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$")
+PUBLISHABLE_SUFFIXES = {".csv", ".json", ".jsonl", ".md"}
+SECRET_PATTERNS = (
+    re.compile(r"github_pat_[A-Za-z0-9_]{20,}"),
+    re.compile(r"ghp_[A-Za-z0-9]{20,}"),
+    re.compile(r"sk-[A-Za-z0-9_-]{20,}"),
+    re.compile(r"AIza[A-Za-z0-9_-]{20,}"),
+)
+
+
+def normalize_github_repository(value: str) -> str:
+    """Return owner/repository while rejecting arbitrary Git URLs."""
+    repository = str(value or "").strip().rstrip("/")
+    for prefix in (
+        "https://github.com/",
+        "http://github.com/",
+        "git@github.com:",
+    ):
+        if repository.startswith(prefix):
+            repository = repository[len(prefix):]
+            break
+    if repository.endswith(".git"):
+        repository = repository[:-4]
+    if not GITHUB_REPOSITORY_PATTERN.fullmatch(repository):
+        raise ValueError(
+            "Repozytorium podaj jako login/nazwa, np. "
+            "anna/ai-qda-workshop-praca."
+        )
+    return repository
+
+
+def github_repository_url(value: str) -> str:
+    return f"https://github.com/{normalize_github_repository(value)}.git"
+
+
+def _git_auth_environment(token: str | None) -> dict[str, str]:
+    """Pass a token through process environment, never a command or URL."""
+    environment = os.environ.copy()
+    if token:
+        encoded = base64.b64encode(
+            f"x-access-token:{token}".encode("utf-8")
+        ).decode("ascii")
+        environment["GIT_CONFIG_COUNT"] = "1"
+        environment["GIT_CONFIG_KEY_0"] = "http.extraHeader"
+        environment["GIT_CONFIG_VALUE_0"] = f"AUTHORIZATION: basic {encoded}"
+    return environment
+
+
+def _run_git(
+    repository_dir: str | Path,
+    *arguments: str,
+    token: str | None = None,
+    check: bool = True,
+) -> subprocess.CompletedProcess[str]:
+    completed = subprocess.run(
+        ["git", *arguments],
+        cwd=Path(repository_dir),
+        env=_git_auth_environment(token),
+        capture_output=True,
+        text=True,
+    )
+    if check and completed.returncode != 0:
+        detail = (completed.stderr or completed.stdout).strip()
+        if token:
+            detail = detail.replace(token, "[UKRYTY_TOKEN]")
+        raise RuntimeError(
+            "Operacja Git nie powiodła się. Sprawdź nazwę repozytorium, "
+            "dostęp sekretu GITHUB_TOKEN i uprawnienie Contents: Read and write. "
+            f"Szczegóły Git: {detail or 'brak komunikatu'}"
+        )
+    return completed
+
+
+def collect_publishable_outputs(
+    repository_dir: str | Path,
+    output_roots: list[str | Path],
+    *,
+    include_api_logs: bool = False,
+) -> list[Path]:
+    """Select reviewed workshop artifacts from outputs directories only."""
+    repository = Path(repository_dir).resolve()
+    selected: list[Path] = []
+    for root in output_roots:
+        candidate = Path(root)
+        output_root = (
+            candidate.resolve()
+            if candidate.is_absolute()
+            else (repository / candidate).resolve()
+        )
+        if not output_root.is_relative_to(repository):
+            raise ValueError("Katalog wyników musi znajdować się w repozytorium.")
+        relative_root = output_root.relative_to(repository)
+        if "outputs" not in relative_root.parts:
+            raise ValueError("Publikować można wyłącznie pliki z katalogów outputs/.")
+        if not output_root.is_dir():
+            continue
+        for path in sorted(output_root.rglob("*")):
+            if not path.is_file() or path.name == "README.md":
+                continue
+            if path.suffix.lower() not in PUBLISHABLE_SUFFIXES:
+                continue
+            if path.suffix.lower() == ".jsonl" and not include_api_logs:
+                continue
+            selected.append(path.relative_to(repository))
+    return sorted(set(selected), key=lambda path: path.as_posix())
+
+
+def _assert_no_secrets(repository: Path, relative_paths: list[Path]) -> None:
+    for relative_path in relative_paths:
+        text = (repository / relative_path).read_text(
+            encoding="utf-8", errors="replace"
+        )
+        if any(pattern.search(text) for pattern in SECRET_PATTERNS):
+            raise ValueError(
+                f"Zapis zatrzymany: {relative_path.as_posix()} może zawierać sekret."
+            )
+
+
+def publish_outputs_to_github(
+    repository_dir: str | Path,
+    output_roots: list[str | Path],
+    *,
+    message: str,
+    participant_repository: str | None = None,
+    token: str | None = None,
+    branch: str = "main",
+    include_api_logs: bool = False,
+) -> dict[str, Any]:
+    """Commit and push selected outputs from a participant-owned workspace."""
+    repository = Path(repository_dir).resolve()
+    if not (repository / ".git").exists():
+        raise ValueError(f"To nie jest robocza kopia Git: {repository}")
+
+    origin = _run_git(repository, "remote", "get-url", "origin").stdout.strip()
+    if participant_repository:
+        expected = normalize_github_repository(participant_repository)
+        if expected.lower() == PUBLIC_WORKSHOP_REPOSITORY.lower():
+            raise ValueError(
+                "Nie zapisuj wyników w repozytorium prowadzących. "
+                "Wskaż własne prywatne repo utworzone z szablonu."
+            )
+        if "github.com" in origin.lower():
+            actual = normalize_github_repository(origin)
+            if actual.lower() != expected.lower():
+                raise ValueError(
+                    f"Sklonowano {actual}, ale sekret AI_QDA_REPOSITORY "
+                    f"wskazuje {expected}."
+                )
+
+    selected = collect_publishable_outputs(
+        repository,
+        output_roots,
+        include_api_logs=include_api_logs,
+    )
+    if not selected:
+        return {"status": "no_files", "paths": [], "origin": origin}
+    _assert_no_secrets(repository, selected)
+    if "github.com" in origin.lower() and not token:
+        raise RuntimeError(
+            "Brak sekretu GITHUB_TOKEN. Niczego nie zatwierdzono ani nie "
+            "wysłano. Dodaj sekret, włącz jego dostęp i spróbuj ponownie."
+        )
+
+    _run_git(repository, "config", "user.name", "AI QDA workshop participant")
+    _run_git(
+        repository,
+        "config",
+        "user.email",
+        "ai-qda-workshop@users.noreply.github.com",
+    )
+    _run_git(repository, "add", "-f", "--", *(path.as_posix() for path in selected))
+    staged = _run_git(
+        repository, "diff", "--cached", "--name-only"
+    ).stdout.splitlines()
+    if not staged:
+        _run_git(repository, "push", "origin", f"HEAD:{branch}", token=token)
+        return {
+            "status": "up_to_date",
+            "paths": [path.as_posix() for path in selected],
+            "origin": origin,
+        }
+
+    safe_message = " ".join(str(message).split())[:120] or "Zapisz wyniki warsztatu"
+    _run_git(repository, "commit", "-m", safe_message)
+    _run_git(repository, "push", "origin", f"HEAD:{branch}", token=token)
+    commit = _run_git(repository, "rev-parse", "HEAD").stdout.strip()
+    return {
+        "status": "pushed",
+        "paths": staged,
+        "origin": origin,
+        "commit": commit,
+    }
 
 
 def procedure_prompt(card: dict[str, str], technical_appendix: str) -> str:

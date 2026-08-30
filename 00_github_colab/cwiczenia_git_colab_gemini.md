@@ -2,12 +2,12 @@
 
 ## Ćwiczenie 1: znajdź swoje miejsce pracy
 
-1. Otwórz swój fork i repozytorium prowadzących w dwóch kartach.
+1. Otwórz swoje prywatne repo i publiczny wzorzec w dwóch kartach.
 2. Wskaż właściciela każdego repozytorium.
-3. Otwórz historię commitów w swoim forku.
+3. Otwórz historię commitów w prywatnym repo.
 4. Dokończ zdanie: „commit zapisuje ..., ale nie zapisuje ...”.
 
-**Kontrola:** potrafisz wrócić do strony swojego forka bez linku od
+**Kontrola:** potrafisz wrócić do strony prywatnego repo bez linku od
 prowadzącego.
 
 ## Ćwiczenie 2: nazwij potrzebną procedurę
@@ -74,11 +74,14 @@ techniczna nie rozstrzyga, która interpretacja mówcy jest trafna.
 ## Ćwiczenie 5: zapis i commit
 
 1. Uruchom notebook od początku.
-2. Obejrzyj CSV, ale nie dodawaj go do Git.
-3. Zapisz kopię notebooka w swoim forku.
-4. Użyj opisu `Dodaj pierwszą procedurę vibe coding`.
-5. Na GitHubie sprawdź zmieniony notebook i historię commita.
+2. Obejrzyj zapisane tabele i decyzje badacza.
+3. Ustaw `PUBLISH_RESULTS_TO_GITHUB=True` i sprawdź status `pushed` albo
+   `up_to_date`.
+4. Zapisz kopię notebooka w prywatnym repo przez
+   **Plik -> Zapisz kopię w GitHubie**.
+5. Na GitHubie znajdź produkty w `00_github_colab/outputs/`, notebook oraz oba
+   commity.
 
 **Exit ticket:** wskaż jeden element, który powinien znaleźć się w Git, jeden
-wygenerowany wynik pozostający poza repozytorium oraz jedną decyzję, której
-nie można zastąpić kontrolą techniczną.
+pełny log API pozostający domyślnie poza repozytorium oraz jedną decyzję,
+której nie można zastąpić kontrolą techniczną.

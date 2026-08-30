@@ -2,19 +2,14 @@
 
 **Środowisko:** lokalne repozytorium, Codex i Python.
 
+Punktem wejścia jest lokalny klon **prywatnego repo uczestnika**, w którym
+notebooki zachowały produkty w `00_github_colab/outputs/` i
+`04_vibe_coding/outputs/`. Nie zaczynaj tej części od czystego publicznego
+wzorca, ponieważ nie zawiera on decyzji ani kandydackiej książki danej osoby.
+
 Ta część nie buduje drugiego pipeline'u. Uczestnik bierze cztery karty
 procedur i kandydackie artefakty z Vibe Codingu, odtwarza ich zależności,
 sprawdza kontrakty oraz wykonuje jedną małą, testowalną zmianę z Codexem.
-
-## Przygotuj Handoff
-
-1. Pobierz z Dysku Google `AI_QDA_Workshop_handoff.zip`, utworzony przez
-   ostatni notebook modułu 04.
-2. Rozpakuj go w lokalnym klonie do
-   `06_outputs/uczestnicy/AI_QDA_Workshop/`. Ten katalog jest ignorowany przez
-   Git.
-3. Wypełnij [brief jednej adaptacji](codex_adaptation_brief.md).
-4. Przejdź przez [pełny scenariusz czterech godzin](przejscie_z_vibe_coding.md).
 
 To nadal warsztat o kodowaniu AI_QDA: adaptujemy sposób wyboru jednostek,
 kodowania D, budowy F/S/T i kontroli śladu w danych. Nie przenosimy do niego
@@ -43,6 +38,8 @@ Po bloku uczestnik potrafi:
 4. **Transfer:** wypełnij brief adaptacji, nazwij role, punkty kontroli badacza
    i zapisz commit.
 
+Pełny scenariusz znajduje się w
+[przejscie_z_vibe_coding.md](przejscie_z_vibe_coding.md).
 Gdy grupa utknie przy walidatorze, może zacząć od działającego
 [fallbacku](starter/README.md) i poprosić Codexa o jedną małą rozbudowę.
 
