@@ -11,17 +11,20 @@ Pełny układ zajęć znajduje się w
 
 ## Zacznij tutaj
 
-1. Wykonaj [`checklistę techniczną`](00_github_colab/checklista_przed_zajeciami.md).
-2. Utwórz z tego publicznego wzorca własne repo przez **Use this template** i
+1. Co najmniej dzień przed zajęciami wykonaj
+   [`handout przedwarsztatowy`](handout_przedwarsztatowy.md).
+2. Na końcu sprawdź krótką
+   [`checklistę techniczną`](00_github_colab/checklista_przed_zajeciami.md).
+3. Utwórz z tego publicznego wzorca własne repo przez **Use this template** i
    ustaw jego widoczność na **Private**.
-3. Skonfiguruj dwa sekrety Colaba: `AI_QDA_REPOSITORY` oraz `GITHUB_TOKEN`,
+4. Skonfiguruj dwa sekrety Colaba: `AI_QDA_REPOSITORY` oraz `GITHUB_TOKEN`,
    zgodnie z
    [`instrukcją prywatnego workspace`](00_github_colab/instrukcja_konto_fork_colab.md).
-4. Jeżeli nie znasz GitHuba lub Colaba, zacznij od
+5. Jeżeli nie znasz GitHuba lub Colaba, zacznij od
    [`00_github_colab/`](00_github_colab/).
-5. Opis i materiały wspólnego korpusu znajdują się w
+6. Opis i materiały wspólnego korpusu znajdują się w
    [`01_data/prekariat/`](01_data/prekariat/).
-6. Przed częścią Vibe Coding obejrzyj
+7. Przed częścią Vibe Coding obejrzyj
    [referencyjną książkę kodową i graf relacji](01_data/codebook/).
 
 Publiczne repo jest czystym wzorcem. Notebooki zapisują sprawdzone produkty do

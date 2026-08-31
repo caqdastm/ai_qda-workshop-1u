@@ -3,6 +3,10 @@
 Przeznacz na nią 20-30 minut przed spotkaniem. Nie pracujesz jeszcze z danymi
 badawczymi.
 
+Jeżeli przygotowujesz środowisko po raz pierwszy, zacznij od pełnego
+[handoutu przedwarsztatowego](../handout_przedwarsztatowy.md). Ta strona jest
+jego skróconą kontrolą końcową.
+
 ## Konto GitHub
 
 - zaloguj się lub utwórz konto;
